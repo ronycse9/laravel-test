@@ -11,6 +11,10 @@
 |
 */
 
+//default route
+Route::get("/",function(){
+  return view("welcome");
+});
 
 //normal route
 Route::get("/",function(){
