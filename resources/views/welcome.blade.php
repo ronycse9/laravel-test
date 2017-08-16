@@ -89,6 +89,16 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+
+                <div class="row">
+                  {{Form::open(['url' => '/save'])}}
+                   Name : <input type="text" name="name"><br>
+                   Email : <input type="eamil" name="email"><br>
+                   <input type="submit" name="save" value="Save">
+
+                  {{Form::close()}}
+
+                </div>
             </div>
         </div>
     </body>

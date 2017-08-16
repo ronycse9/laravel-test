@@ -16,6 +16,12 @@ Route::get("/",function(){
   return view("welcome");
 });
 
+Route::post("/save",function(){
+  return "Ok";
+});
+
+/*
+
 //normal route
 Route::get("/",function(){
   return "Hello World!";
@@ -49,4 +55,4 @@ Route::get("/mul/{id}/{name}",function($id,$name){
 
 Route::get('user/profile', function () {
     //
-})->name('profile');
+})->name('profile');*/
