@@ -1,0 +1,13 @@
+For Custom Helper
+1. Create a helper folder into app folder and make a custom helper file into that
+2.Add files into "composer.json" file in autoload sesction
+ Example:
+ "autoload": {
+     "files" : [
+       "app/helper/custom-helper.php"
+     ]
+
+ }
+ 3. Update the composer file using following command
+ composer dump-autoload
+ 4. use custom helper function
