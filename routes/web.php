@@ -20,6 +20,8 @@ Route::post("/save",function(){
   return "Ok";
 });
 
+Route::get("test","Home@index");
+
 /*
 
 //normal route

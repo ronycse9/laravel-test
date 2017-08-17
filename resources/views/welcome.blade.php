@@ -97,6 +97,39 @@
                 </div>
               </div>
             {{Form::close()}}
+            <br>
+
+              <div class="container">
+                <!--pre>{{-- dd($data) --}}</pre>
+                <pre>{{--print_r($data->toArray())--}}</pre>
+                <pre>{{--print_r($data->tojson())--}}</pre-->
+
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>SL</th>
+                      <th>Name</th>
+                      <th>Mobile</th>
+                      <th>Email</th>
+                      <th>Address</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($data as $key => $value)
+                        <tr>
+                          <td>{{$key+1}}</td>
+                          <td>{{$value->name}}</td>
+                          <td>{{$value->mobile}}</td>
+                          <td>{{$value->email}}</td>
+                          <td>{{$value->address}}</td>
+                       </tr>
+                      @endforeach
+                  </tbody>
+                </table>
+
+                {{--$data->render()--}}
+                {{--$data->links()--}}
+              </div>
 
         </div>
     </body>
