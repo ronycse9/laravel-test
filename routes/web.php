@@ -16,11 +16,11 @@ Route::get("/",function(){
   return view("welcome");
 });
 
-Route::post("/save",function(){
-  return "Ok";
-});
+Route::post("/save","Home@save");
 
-Route::get("test","Home@index");
+Route::get("/test","Home@index");
+
+Route::post("/getmsg","Home@ajax");
 
 /*
 

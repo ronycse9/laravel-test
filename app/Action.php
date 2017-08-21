@@ -20,4 +20,18 @@ class Action extends Model
             ->get();
       return $result;
     }
+
+
+    public function add($table = NULL, $data = [], $where = []){
+      if($where != NULL){
+          $query = DB::table($table)
+                  ->update($data)
+                  ->where($where);
+          return "update";
+      }
+      $query = DB::table($table)
+              ->insert($data);
+      return "success";
+
+    }
 }

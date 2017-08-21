@@ -2,10 +2,13 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title> {{ Config::get("lab_config.site_name") }} | Home</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -14,86 +17,45 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{{url('public/js/jquery.js')}}"></script>
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             <div class="content">
-                <div class="title m-b-md">
-                    {{myName()}}
+                <div class="title m-b-md text-center">
+                    <h1>{{myName()}}</h1>
                 </div>
 
                 {{Form::open(['url'=>'/save','method'=>'post','files'=>'true'])}}
                 <div class="container">
                   <div class="col-md-6">
 
+                    <div class="form-group">
+                         <label>Name</label>
+                         <input type="text" class="form-control" required name="name">
+                     </div>
+
+                     <div class="form-group">
+                          <label>Mobile</label>
+                          <input type="text" class="form-control" required name="mobile">
+                      </div>
 
                    <div class="form-group">
-                        <label for="email">Email address:</label>
-                        <input type="email" class="form-control" id="email">
+                        <label>Email</label>
+                        <input type="email" class="form-control" required name="email">
                     </div>
-                    <div class="form-group">
-                        <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" id="pwd">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                     <div class="form-group">
+                         <label>Address</label>
+                         <textarea required name="address" rows="5" cols="75"></textarea>
+                     </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
               </div>
             {{Form::close()}}
@@ -127,10 +89,44 @@
                   </tbody>
                 </table>
 
-                {{--$data->render()--}}
+                {{$data->render()}}
                 {{--$data->links()--}}
-              </div>
 
-        </div>
+
+
+
+         <span id="msg"></span>
+         <hr>
+            <button type="button" name="button" id="show">Show</button>
+          </div>
+          </div>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            var url = "http://" + window.location.hostname + "/mySite/";
+
+              $('#show').on("click",function(){
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                  });
+
+                  var obj = {
+                    table : "students",
+                    cond : { email : "bjayanta@gmail.com"}
+                  };
+
+                  $.ajax({
+                     type :'POST',
+                     url  : url + 'getmsg',
+                     data : "where=" + JSON.stringify(obj)
+                   }).done(function(response){
+                     $("#msg").text(response.msg);
+                     console.log(response);
+                   });
+               });
+          });
+        </script>
     </body>
 </html>
