@@ -8,7 +8,9 @@ use App\Action;
 class Home extends Controller
 {
 
-    public function index(){
+    public function index(Request $request){
+
+      echo $request->session()->get("my")[0];
 
       $obj = new Action();
 

@@ -22,6 +22,11 @@ Route::get("/test","Home@index");
 
 Route::post("/getmsg","Home@ajax");
 
+Route::get("/get","SessionC@getData");
+Route::get("/store","SessionC@storeData");
+Route::get("/delete","SessionC@destroyData");
+
+
 /*
 
 //normal route
